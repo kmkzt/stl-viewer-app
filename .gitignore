@@ -1,0 +1,38 @@
+# ignore
+*.DS_Store
+.cache
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production,distfile
+build
+dist
+lib
+.size-snapshot.json
+.changelog
+
+# log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+__debug__
+
+# configuration for editor
+.vscode
+
+# npm lock files
+package-lock.json
+# yarn.lock
+
+# next.js
+!examples/**/lib
+.next
+out
+.vercel

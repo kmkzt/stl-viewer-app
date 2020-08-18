@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>stl-viewer-app</title>
+</head>
+<body>
+<script src="https://unpkg.com/three@0.77.0/three.min.js"></script>
+<script src="https://unpkg.com/three@0.77.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://unpkg.com/three@0.77.0/examples/js/renderers/CanvasRenderer.js"></script>
+<script src="https://unpkg.com/three@0.77.0/examples/js/renderers/Projector.js"></script>
+<script src="https://unpkg.com/three@0.77.0/examples/js/controls/TrackballControls.js"></script>
+<script>
+
+
+var APP = { };
+
+APP.animate = function() {
+	APP.renderer.render( APP.scene, APP.camera );
+	APP.controls.update();
+	requestAnimationFrame( APP.animate );
+};
+
+window.addEventListener('load', function() {
+    console.log(APP)
+	// Renderer
+	APP.renderer = new THREE.WebGLRenderer();
+	APP.renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild( APP.renderer.domElement );
+
+	 // Camera
+	APP.camera = new THREE.PerspectiveCamera();
+	APP.camera.position.z = 100;
+
+	// Scene
+	APP.scene = new THREE.Scene();
+	APP.scene.add( APP.camera );
+
+	// light
+	var directionalLight = new THREE.DirectionalLight( 0xffffff, 3 );
+	directionalLight.position.y = 10;
+	directionalLight.position.z = 10;
+	APP.scene.add( directionalLight );
+	var aLight = new THREE.AmbientLight( 0xffffff);
+	APP.scene.add( aLight );
+
+	// load stl file
+	var loader = new THREE.STLLoader();
+	loader.load( './stl/bunny.stl', function ( geometry ) {
+        console.log(geometry)
+		var material = new THREE.MeshLambertMaterial( { ambient: 0xff5533, color: 0xff5533} );
+		mesh = new THREE.Mesh( geometry, material );
+		APP.scene.add( mesh );
+		APP.controls = new THREE.TrackballControls( APP.camera );
+		APP.animate();
+	});
+});
+
+</script>
+</body>
+</html>
