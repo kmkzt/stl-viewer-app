@@ -47,8 +47,7 @@ window.addEventListener('load', function() {
 	// load stl file
 	var loader = new THREE.STLLoader();
 	loader.load( './stl/bunny.stl', function ( geometry ) {
-        console.log(geometry)
-		var material = new THREE.MeshLambertMaterial( { ambient: 0xff5533, color: 0xff5533} );
+    var material = new THREE.MeshLambertMaterial( { ambient: 0xff5533, color: 0xff5533} );
 		mesh = new THREE.Mesh( geometry, material );
 		APP.scene.add( mesh );
 		APP.controls = new THREE.TrackballControls( APP.camera );
